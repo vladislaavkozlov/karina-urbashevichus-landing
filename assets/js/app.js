@@ -43,6 +43,22 @@ var CONTACTS = {
     if (e.key === 'Escape') toggleMenu(false);
   });
 
+
+  /* --- sticky-кнопка: появляется после первого экрана, прячется у блока записи --- */
+  var sticky = document.getElementById('stickyCta');
+  var zapis = document.getElementById('zapis');
+  if (sticky && zapis) {
+    var syncSticky = function () {
+      var passedHero = window.scrollY > window.innerHeight * 0.85;
+      var zapisTop = zapis.getBoundingClientRect().top;
+      var nearFinal = zapisTop < window.innerHeight * 0.9;
+      sticky.classList.toggle('is-on', passedHero && !nearFinal);
+    };
+    syncSticky();
+    window.addEventListener('scroll', syncSticky, { passive: true });
+    window.addEventListener('resize', syncSticky);
+  }
+
   /* --- появление блоков при скролле --- */
   var items = document.querySelectorAll('.rv');
   if ('IntersectionObserver' in window) {
@@ -81,6 +97,13 @@ var CONTACTS = {
           ' class="btn ' + (a.main ? 'btn--light' : 'btn--ghost') + '">' + a.label +
           (a.main ? ' <span class="arr">→</span>' : '') + '</a>';
       }).join('');
+    }
+
+    var hint = document.getElementById('ctaHint');
+    if (hint) {
+      hint.textContent = CONTACTS.whatsapp
+        ? 'Откроется WhatsApp с готовым сообщением - останется нажать «отправить»'
+        : 'Откроется диалог в Instagram Direct - опишите свою ситуацию в паре предложений';
     }
   }
 
