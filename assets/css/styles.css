@@ -42,10 +42,11 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
 /* ---------- типографика ---------- */
 .eyebrow{
-  font-size:11px;letter-spacing:.24em;text-transform:uppercase;
-  color:var(--ink-40);font-weight:400;display:flex;align-items:center;gap:14px;
+  font-size:11px;letter-spacing:.24em;text-transform:uppercase;line-height:1.5;
+  color:var(--ink-40);font-weight:400;display:flex;align-items:flex-start;gap:14px;
 }
-.eyebrow::before{content:"";width:32px;height:1px;background:var(--champagne);flex:none}
+/* линия держится за ПЕРВУЮ строку, иначе при переносе она повисает между строк */
+.eyebrow::before{content:"";width:32px;height:1px;background:var(--champagne);flex:none;margin-top:.75em}
 .eyebrow--center{justify-content:center}
 
 h1,h2,h3,h4{font-family:var(--serif);font-weight:300;margin:0;letter-spacing:-.015em;line-height:1.06}
@@ -387,4 +388,11 @@ p:last-child{margin-bottom:0}
   .nav__cta{display:none}
   .midcta .btn{width:100%}
   .hero__micro{margin-top:16px}
+}
+
+/* на узких экранах подпись первого экрана переносится - убираем лишний трекинг,
+   чтобы вторая строка не выглядела оторванной */
+@media (max-width:640px){
+  .eyebrow{font-size:10.5px;letter-spacing:.19em;gap:11px}
+  .eyebrow::before{width:24px}
 }
