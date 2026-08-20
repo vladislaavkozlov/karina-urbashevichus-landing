@@ -1,0 +1,346 @@
+/* ============================================================
+   УРБАШЕВИЧУС clinic - авторская ортодонтия, Ставрополь
+   Дизайн-система: молочный / шампань / графит
+   ============================================================ */
+
+:root{
+  --milk:#F7F3ED;
+  --milk-2:#EFE8DE;
+  --milk-3:#E7DED2;
+  --graphite:#1E1C1A;
+  --graphite-soft:#3A3632;
+  --ink-60:#6E665C;
+  --ink-40:#9A9186;
+  --champagne:#B2915F;
+  --champagne-soft:#D9C4A2;
+  --line:rgba(30,28,26,.14);
+  --line-soft:rgba(30,28,26,.07);
+
+  --serif:"Cormorant Garamond",Georgia,serif;
+  --sans:"Inter","Helvetica Neue",Arial,sans-serif;
+
+  --pad:clamp(20px,5vw,80px);
+  --sec:clamp(84px,11vw,180px);
+  --maxw:1440px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--milk);color:var(--graphite);
+  font-family:var(--sans);font-weight:300;font-size:16px;line-height:1.65;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+::selection{background:var(--champagne-soft);color:var(--graphite)}
+
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding-inline:var(--pad)}
+.section{padding-block:var(--sec);position:relative}
+
+/* ---------- типографика ---------- */
+.eyebrow{
+  font-size:11px;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--ink-40);font-weight:400;display:flex;align-items:center;gap:14px;
+}
+.eyebrow::before{content:"";width:32px;height:1px;background:var(--champagne);flex:none}
+.eyebrow--center{justify-content:center}
+
+h1,h2,h3,h4{font-family:var(--serif);font-weight:300;margin:0;letter-spacing:-.015em;line-height:1.06}
+.h-display{font-size:clamp(44px,7.4vw,104px)}
+.h-1{font-size:clamp(34px,5.2vw,72px);line-height:1.04}
+.h-2{font-size:clamp(26px,3.1vw,42px);line-height:1.12}
+.h-3{font-size:clamp(21px,2.1vw,28px);line-height:1.2}
+em,.it{font-style:italic}
+.champ{color:var(--champagne)}
+.lead{font-size:clamp(16px,1.25vw,19px);line-height:1.75;color:var(--ink-60);font-weight:300}
+p{margin:0 0 1.1em}
+p:last-child{margin-bottom:0}
+
+/* ---------- кнопки ---------- */
+.btn{
+  --bg:var(--graphite);--fg:var(--milk);
+  display:inline-flex;align-items:center;justify-content:center;gap:12px;
+  padding:17px 34px;background:var(--bg);color:var(--fg);border-radius:100px;
+  font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:400;
+  transition:transform .5s var(--ease),background .4s var(--ease),color .4s var(--ease);
+  position:relative;overflow:hidden;white-space:nowrap;
+}
+.btn:hover{transform:translateY(-2px);background:var(--champagne);color:#fff}
+.btn .arr{transition:transform .5s var(--ease)}
+.btn:hover .arr{transform:translateX(5px)}
+.btn--ghost{background:transparent;color:var(--graphite);box-shadow:inset 0 0 0 1px var(--line)}
+.btn--ghost:hover{background:var(--graphite);color:var(--milk);box-shadow:inset 0 0 0 1px var(--graphite)}
+.btn--light{background:var(--milk);color:var(--graphite)}
+.btn--light:hover{background:var(--champagne);color:#fff}
+
+/* ---------- шапка ---------- */
+.nav{
+  position:fixed;inset:0 0 auto;z-index:60;
+  transition:background .5s var(--ease),box-shadow .5s var(--ease),padding .5s var(--ease);
+  padding-block:22px;
+}
+.nav.is-stuck{background:rgba(247,243,237,.86);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line-soft);padding-block:12px}
+.nav__in{display:flex;align-items:center;justify-content:space-between;gap:28px}
+.logo{display:flex;align-items:center;gap:12px}
+.logo svg{width:22px;height:30px;flex:none}
+.logo__t{font-family:var(--sans);font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;line-height:1.25}
+.logo__t small{display:block;font-size:9.5px;letter-spacing:.22em;color:var(--ink-40)}
+.nav__menu{display:flex;align-items:center;gap:34px}
+.nav__menu a{font-size:12.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-60);transition:color .3s}
+.nav__menu a:hover{color:var(--graphite)}
+.nav__cta{padding:13px 26px;font-size:11.5px}
+.burger{display:none;width:44px;height:44px;align-items:center;justify-content:center;margin-right:-10px}
+.burger span{display:block;width:22px;height:1px;background:var(--graphite);position:relative;transition:.4s var(--ease)}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:22px;height:1px;background:var(--graphite);transition:.4s var(--ease)}
+.burger span::before{top:-7px}.burger span::after{top:7px}
+.nav.is-open .burger span{background:transparent}
+.nav.is-open .burger span::before{top:0;transform:rotate(45deg)}
+.nav.is-open .burger span::after{top:0;transform:rotate(-45deg)}
+
+.drawer{
+  position:fixed;inset:0;z-index:55;background:var(--milk);
+  padding:120px var(--pad) 48px;display:flex;flex-direction:column;justify-content:space-between;
+  transform:translateY(-100%);transition:transform .6s var(--ease);
+}
+.drawer.is-open{transform:none}
+.drawer nav a{display:block;font-family:var(--serif);font-size:clamp(28px,7vw,40px);padding:10px 0;border-bottom:1px solid var(--line-soft);overflow-wrap:anywhere}
+.drawer__foot a{overflow-wrap:anywhere}
+.drawer__foot{font-size:13px;color:var(--ink-60);line-height:1.9}
+
+/* ---------- hero ---------- */
+.hero{position:relative;padding-top:clamp(120px,15vw,180px);padding-bottom:clamp(56px,7vw,96px);overflow:hidden}
+.hero__grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(30px,5vw,80px);align-items:center}
+.hero__title{margin:26px 0 0}
+.hero__title .ln{display:block;overflow:hidden}
+.hero__title .ln > span{display:block;transform:translateY(105%);animation:rise 1.15s var(--ease) forwards}
+.hero__title .ln:nth-child(2) > span{animation-delay:.09s}
+.hero__title .ln:nth-child(3) > span{animation-delay:.18s}
+@keyframes rise{to{transform:none}}
+.hero__lead{max-width:44ch;margin-top:30px;opacity:0;animation:fadeUp 1s var(--ease) .5s forwards}
+.hero__acts{display:flex;flex-wrap:wrap;gap:14px;margin-top:38px;opacity:0;animation:fadeUp 1s var(--ease) .65s forwards}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+.hero__media{position:relative;opacity:0;animation:fadeUp 1.2s var(--ease) .35s forwards}
+.arch{
+  position:relative;border-radius:520px 520px 18px 18px;overflow:hidden;
+  background:var(--milk-2);box-shadow:0 30px 70px -50px rgba(30,28,26,.6);
+}
+.arch img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:50% 22%;filter:saturate(.92) contrast(1.02)}
+.arch::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px rgba(255,255,255,.55)}
+.hero__badge{
+  position:absolute;left:-8px;bottom:34px;background:var(--milk);border:1px solid var(--line);
+  border-radius:100px;padding:12px 22px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-60);
+  display:flex;align-items:center;gap:10px;
+}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--champagne)}
+
+/* ---------- полоса фактов ---------- */
+.facts{border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+.facts__in{display:grid;grid-template-columns:repeat(4,1fr)}
+.fact{padding:38px 30px 34px;border-left:1px solid var(--line-soft)}
+.fact:first-child{border-left:0;padding-left:0}
+.fact__n{font-family:var(--serif);font-size:clamp(34px,4vw,54px);line-height:1;letter-spacing:-.02em}
+.fact__t{margin-top:12px;font-size:13.5px;color:var(--ink-60);line-height:1.55;max-width:22ch}
+
+/* ---------- манифест ---------- */
+.manifest{text-align:center;background:var(--milk-2)}
+.manifest__q{max-width:19ch;margin:26px auto 0}
+.manifest__p{max-width:56ch;margin:30px auto 0}
+.rule{width:1px;height:64px;background:var(--line);margin:0 auto}
+
+/* ---------- задачи ---------- */
+.tasks__head{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:clamp(40px,5vw,70px)}
+.cards{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line-soft)}
+.card{grid-column:span 2;background:var(--milk);padding:clamp(28px,3vw,44px);transition:background .5s var(--ease);position:relative}
+.card:nth-child(4),.card:nth-child(5){grid-column:span 3}
+.card:hover{background:var(--milk-2)}
+.card__n{font-size:11px;letter-spacing:.2em;color:var(--champagne)}
+.card h3{margin:22px 0 12px}
+.card p{font-size:14.5px;color:var(--ink-60);line-height:1.7}
+.card__line{height:1px;background:var(--champagne);width:0;transition:width .6s var(--ease);margin-top:26px}
+.card:hover .card__line{width:46px}
+
+/* ---------- кейсы ---------- */
+.cases{background:var(--graphite);color:var(--milk)}
+.cases .eyebrow{color:rgba(247,243,237,.5)}
+.cases .lead{color:rgba(247,243,237,.66)}
+.case{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4.5vw,72px);align-items:center;padding-block:clamp(44px,5.5vw,80px);border-top:1px solid rgba(247,243,237,.12)}
+.case:first-of-type{border-top:0}
+.case:nth-child(even) .case__media{order:-1}
+.case__meta{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--champagne-soft)}
+.case h3{margin:20px 0 16px;color:var(--milk)}
+.case p{font-size:15px;color:rgba(247,243,237,.66);line-height:1.75;max-width:46ch}
+.case__facts{margin-top:26px;display:flex;gap:34px;flex-wrap:wrap}
+.case__fact b{display:block;font-family:var(--serif);font-size:26px;font-weight:300}
+.case__fact span{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(247,243,237,.45)}
+
+/* слайдер до/после */
+.ba{
+  --p:50%;position:relative;overflow:hidden;border-radius:4px;background:#0d0c0b;
+  user-select:none;touch-action:pan-y;cursor:ew-resize;aspect-ratio:var(--ar,3/4);
+}
+.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--op,50% 40%);pointer-events:none}
+.ba__after{position:absolute;inset:0;clip-path:inset(0 0 0 var(--p))}
+.ba__handle{position:absolute;top:0;bottom:0;left:var(--p);width:1px;background:rgba(255,255,255,.9);transform:translateX(-.5px);pointer-events:none}
+.ba__knob{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:52px;height:52px;border-radius:50%;background:rgba(247,243,237,.94);
+  display:flex;align-items:center;justify-content:center;gap:5px;box-shadow:0 8px 30px rgba(0,0,0,.35);
+}
+.ba__knob i{width:0;height:0;border-block:4px solid transparent}
+.ba__knob i:first-child{border-right:6px solid var(--graphite)}
+.ba__knob i:last-child{border-left:6px solid var(--graphite)}
+.ba__tag{
+  position:absolute;bottom:16px;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  padding:7px 14px;border-radius:100px;background:rgba(16,15,14,.55);color:rgba(255,255,255,.9);backdrop-filter:blur(6px);pointer-events:none;
+}
+.ba__tag--l{left:16px}.ba__tag--r{right:16px}
+.ba__note{margin-top:14px;font-size:12px;color:rgba(247,243,237,.4);letter-spacing:.02em}
+
+/* ---------- о враче ---------- */
+.about__grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(32px,5vw,84px);align-items:start}
+.about__media{position:relative}
+.about__media .arch{border-radius:400px 400px 14px 14px}
+.about__media img{aspect-ratio:4/5;object-fit:cover;object-position:50% 30%}
+.about__sig{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--ink-60);margin-top:24px}
+.quote{font-family:var(--serif);font-size:clamp(22px,2.4vw,32px);line-height:1.35;font-style:italic;margin:0 0 34px;padding-left:26px;border-left:1px solid var(--champagne)}
+.creds{margin:34px 0 0;padding:0;list-style:none;border-top:1px solid var(--line-soft)}
+.creds li{display:flex;gap:22px;padding:16px 0;border-bottom:1px solid var(--line-soft);font-size:15px;color:var(--ink-60)}
+.creds li b{font-weight:400;color:var(--graphite);min-width:130px;flex:none;font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding-top:3px}
+
+/* ---------- обучение ---------- */
+.study{background:var(--milk-2)}
+.study__grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(30px,5vw,80px);align-items:center}
+.study img{border-radius:4px;aspect-ratio:4/5;object-fit:cover;object-position:50% 30%}
+.study__cap{font-size:12px;color:var(--ink-40);margin-top:14px;letter-spacing:.04em}
+
+/* ---------- клиника ---------- */
+.clinic__sign{margin-top:clamp(34px,4vw,58px);border-radius:4px;overflow:hidden;position:relative;background:var(--milk-3)}
+.clinic__sign img{width:100%;aspect-ratio:32/10;object-fit:cover;filter:saturate(.82) contrast(1.03) brightness(1.03)}
+.clinic__row{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,28px);margin-top:clamp(14px,2vw,28px)}
+.clinic__row img{border-radius:4px;aspect-ratio:4/5;object-fit:cover;filter:saturate(.86)}
+.clinic__info{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:clamp(34px,4vw,56px);padding-top:34px;border-top:1px solid var(--line-soft)}
+.addr{font-family:var(--serif);font-size:clamp(24px,2.6vw,34px);line-height:1.25}
+.addr small{display:block;font-family:var(--sans);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-40);margin-bottom:12px}
+
+/* ---------- финальный CTA ---------- */
+.final{background:var(--graphite);color:var(--milk);text-align:center}
+.final .eyebrow{color:rgba(247,243,237,.45)}
+.final h2{margin:26px auto 0;max-width:17ch}
+.final p{color:rgba(247,243,237,.62);max-width:52ch;margin:26px auto 0}
+.final__acts{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:44px}
+.final__acts .btn--ghost{color:var(--milk);box-shadow:inset 0 0 0 1px rgba(247,243,237,.3)}
+.final__acts .btn--ghost:hover{background:var(--milk);color:var(--graphite)}
+.final__note{margin-top:34px;font-size:12.5px;color:rgba(247,243,237,.42)}
+
+/* ---------- футер ---------- */
+.foot{background:var(--graphite);color:rgba(247,243,237,.6);padding-block:44px;border-top:1px solid rgba(247,243,237,.12);font-size:12.5px}
+.foot__in{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;align-items:center}
+.foot a:hover{color:var(--milk)}
+.foot .logo__t{color:var(--milk)}
+.foot .logo svg{color:var(--milk)}
+.foot__legal{max-width:62ch;margin-top:22px;font-size:11.5px;color:rgba(247,243,237,.36);line-height:1.7}
+
+/* ---------- reveal ---------- */
+.rv{opacity:0;transform:translateY(22px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.rv.is-in{opacity:1;transform:none}
+.rv-d1{transition-delay:.08s}.rv-d2{transition-delay:.16s}.rv-d3{transition-delay:.24s}
+
+/* ---------- адаптив ---------- */
+@media (max-width:1024px){
+  .nav__menu{display:none}
+  .burger{display:flex}
+  .hero__grid{grid-template-columns:1fr;gap:44px}
+  .hero__media{max-width:440px;width:100%;margin-inline:auto}
+  .facts__in{grid-template-columns:1fr 1fr}
+  .fact{padding:26px 22px}
+  .fact:nth-child(3){border-left:0;padding-left:0}
+  .fact:first-child,.fact:nth-child(3){padding-left:0}
+  .fact:nth-child(3),.fact:nth-child(4){border-top:1px solid var(--line-soft)}
+  .cards{grid-template-columns:1fr 1fr}
+  .card,.card:nth-child(4),.card:nth-child(5){grid-column:span 1}
+  .case{grid-template-columns:1fr;gap:28px}
+  .case:nth-child(even) .case__media{order:0}
+  .about__grid,.study__grid,.tasks__head,.clinic__info{grid-template-columns:1fr;gap:34px}
+  .about__media{max-width:380px}
+  .study img{aspect-ratio:4/3}
+}
+@media (max-width:640px){
+  body{font-size:15.5px}
+  .facts__in{grid-template-columns:1fr}
+  .fact{border-left:0;padding:22px 0;border-top:1px solid var(--line-soft)}
+  .fact:first-child{border-top:0}
+  .cards{grid-template-columns:1fr}
+  .clinic__row{grid-template-columns:1fr 1fr}
+  .clinic__row img:last-child{grid-column:span 2;aspect-ratio:16/10;object-position:50% 30%}
+  .clinic__sign img{aspect-ratio:16/9}
+  .hero__badge{left:0;bottom:16px;padding:10px 16px;font-size:10px}
+  .nav__cta{padding:11px 18px;font-size:10.5px}
+  .hero__acts .btn,.final__acts .btn,.clinic__info .btn{padding:15px 24px;width:100%}
+  .hero__acts,.final__acts{width:100%}
+  .quote{padding-left:18px}
+  .creds li{flex-direction:column;gap:6px}
+  .ba__knob{width:44px;height:44px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  .hero__title .ln>span,.hero__lead,.hero__acts,.hero__media{opacity:1;transform:none;animation:none}
+  .rv{opacity:1;transform:none}
+}
+
+/* ---------- термин под бытовым заголовком карточки ---------- */
+.card__term{
+  font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--champagne);
+  margin:-4px 0 14px;line-height:1.5;
+}
+
+/* ---------- как проходит лечение ---------- */
+.steps__list{
+  list-style:none;margin:0;padding:0;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,2.4vw,40px);
+}
+.step{position:relative;padding-top:26px;border-top:1px solid var(--line)}
+.step__n{
+  font-family:var(--serif);font-size:15px;letter-spacing:.1em;color:var(--champagne);
+  display:block;margin-bottom:18px;
+}
+.step h3{margin:0 0 12px}
+.step p{font-size:14.5px;color:var(--ink-60);line-height:1.7}
+
+/* ---------- отзывы ---------- */
+.reviews{background:var(--milk-2)}
+.rev__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,28px)}
+.rev{
+  margin:0;background:var(--milk);border:1px solid var(--line-soft);border-radius:4px;
+  padding:clamp(26px,2.6vw,38px);display:flex;flex-direction:column;justify-content:space-between;gap:26px;
+}
+.rev blockquote{
+  margin:0;font-family:var(--serif);font-size:clamp(19px,1.7vw,23px);line-height:1.4;font-style:italic;
+}
+.rev blockquote::before{content:"«"}
+.rev blockquote::after{content:"»"}
+.rev figcaption{display:flex;flex-direction:column;gap:5px;border-top:1px solid var(--line-soft);padding-top:18px}
+.rev figcaption b{font-weight:400;font-size:14px}
+.rev figcaption span{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-40)}
+
+.link-underline{
+  font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-60);
+  border-bottom:1px solid var(--line);padding-bottom:3px;transition:color .3s,border-color .3s;
+}
+.link-underline:hover{color:var(--graphite);border-color:var(--champagne)}
+.final .link-underline{color:rgba(247,243,237,.6);border-color:rgba(247,243,237,.25)}
+.final .link-underline:hover{color:var(--milk);border-color:var(--champagne)}
+
+/* ---------- адаптив новых блоков (после базовых правил, иначе каскад перебьёт) ---------- */
+@media (max-width:1024px){
+  .steps__list{grid-template-columns:1fr 1fr;gap:28px 26px}
+  .rev__grid{grid-template-columns:1fr}
+  .rev blockquote{font-size:20px}
+}
+@media (max-width:640px){
+  .steps__list{grid-template-columns:1fr;gap:24px}
+  .step{padding-top:20px}
+}
